@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('laravel_1', function (Blueprint $table) {
+        Schema::create('guestbook', function (Blueprint $table) {
+            $table->id();
             $table->string('nama');
-            $table->string('alamat');
-            $table->integer('nomor_kontak');
-            $table->unique('nomor_kontak');
+            $table->string('alamat', 200)->nullable();
+            $table->text('email');
+            $table->integer('nomor_wa');
+            $table->timestamps();
         });
     }
 
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('laravel_1');
+        Schema::dropIfExists('guestbook');
     }
 };

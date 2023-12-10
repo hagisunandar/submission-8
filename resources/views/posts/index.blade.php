@@ -14,7 +14,7 @@
 
                 <!-- TOMBOL TAMBAH DATA -->
                 <div class="pb-3">
-                  <a href='home/create' class="btn btn-primary">+ Tambah Data</a>
+                  <a href='{{ url('/posts/create') }}' class="btn btn-primary">+ Tambah Data</a>
                 </div>
 
                 <table class="table table-striped">
@@ -23,22 +23,26 @@
                             <th class="col-md-1">No</th>
                             <th class="col-md-3">Nama</th>
                             <th class="col-md-4">Alamat</th>
-                            <th class="col-md-2">Nomor Kontak</th>
+                            <th class="col-md-2">Email</th>
+                            <th class="col-md-2">Nomor WA</th>
                             <th class="col-md-2">Aksi</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Anita Julianti</td>
-                            <td>Jl.Cibabat No.50</td>
-                            <td>083125567732</td>
-                            <td>
-                                <a href='' class="btn btn-warning btn-sm">Edit</a>
-                                <a href='' class="btn btn-danger btn-sm">Del</a>
-                            </td>
-                        </tr>
-                    </tbody>
+                    <tr>
+                        @foreach($posts as $item)
+                            <tr>
+                                <td>{{ $item['id'] }}</td>
+                                <td>{{ $item['nama'] }}</td>
+                                <td>{{ $item['alamat'] }}</td>
+                                <td>{{ $item['email'] }}</td>
+                                <td>{{ $item['nomor_wa'] }}</td>
+                                <td>
+                                    <a href='' class="btn btn-warning btn-sm">Edit</a>
+                                    <a href='' class="btn btn-danger btn-sm">Del</a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tr>
                 </table>
           </div>
           <!-- AKHIR DATA -->

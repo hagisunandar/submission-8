@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\laravel_1;
 use Illuminate\Http\Request;
+use App\Models\Guestbook;
+use Illuminate\Support\Facades\App;
 
 class AppController extends Controller
 {
@@ -12,7 +14,10 @@ class AppController extends Controller
      */
     public function index()
     {
-        return view('products.index');
+        //get posts
+        $posts = Guestbook::all();
+
+        return view('posts.index', compact('posts'));
     }
 
     /**
@@ -20,7 +25,7 @@ class AppController extends Controller
      */
     public function create()
     {
-        return view('products.create');
+        return view('posts.create');
     }
 
     /**
@@ -28,14 +33,23 @@ class AppController extends Controller
      */
     public function store(Request $request)
     {
-        $data = [
-            'nama'=>$request->nama,
-            'alamat'=>$request->alamat,
-            'nomorkontak'=>$request->nomorkontak,
-        ];
+        $validator = Guestbook::make($request->all(),[
+            'nama' => 'request',
+            'alamat' => 'request',
+            'email' => 'request',
+            'nomor_wa' => 'request',
+        ]);
 
-        laravel_1::create($data);
-        return 'hi';
+        // if($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
+
+        $data['nama']     = $request->nama;
+        $data['alamat'] = $request->alamat;
+        $data['email'] = $request->email;
+        $data['nomor_wa'] = $request->nomor_wa;
+
+        Guestbook::create($data);
+
+        return redirect()->route('index');
     }
 
     /**

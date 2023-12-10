@@ -14,8 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('products/index');
-});
+Route::resource('/', AppController::class);
 
-Route::resource('home', AppController::class);
+Route::resource('/posts', AppController::class);
+
+// Route::get('/posts/create',[AppController::class, 'create']);
+Route::get('/posts',[AppController::class,'index'])->name('index');
+Route::post('/posts/create',[AppController::class, 'create']);
+
+// Route::resource('posts', \App\Http\Controllers\PostController::class);
