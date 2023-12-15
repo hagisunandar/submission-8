@@ -17,9 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::resource('/', AppController::class);
 
 Route::resource('/posts', AppController::class);
-
-// Route::get('/posts/create',[AppController::class, 'create']);
-Route::get('/posts',[AppController::class,'index'])->name('index');
-Route::post('/posts/create',[AppController::class, 'create']);
-
-// Route::resource('posts', \App\Http\Controllers\PostController::class);
+Route::get('/',[AppController::class,'index'])->name('posts.index');
+Route::get('/posts',[AppController::class,'index'])->name('posts.index');
+Route::post('/create',[AppController::class, 'create'])->name('posts.create');
+Route::get('/edit/{id}',[AppController::class,'edit'])->name('posts.edit');
+Route::put('/update/{id}',[AppController::class,'update'])->name('posts.update');
+Route::delete('/destroy/{id}',[AppController::class,'destroy'])->name('posts.destroy');
+Route::get('/search', [AppController::class,'search'])->name('posts.search');
