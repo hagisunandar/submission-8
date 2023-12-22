@@ -108,4 +108,10 @@ class AppController extends Controller
             return redirect()->route('posts.index')->with('error', 'Data diri tidak ditemukan.');
         }
     }
+
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+
+    // }
 }
